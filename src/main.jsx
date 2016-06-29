@@ -13,7 +13,7 @@ class App extends React.Component {
     return (
       <div>
         <LeftSideBar />
-        <div><TextField label="Document" required={true} /></div>
+        <div><TextField label="Document" required={true} error="invalid" /></div>
         <RightSideBar />
       </div>
     )

@@ -1,16 +1,12 @@
 import * as React from 'react'
 import classNames from 'classnames'
 
-export class TextField extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.handleClick = this.handleClick.bind(this)
-        this.handleMouseEnter = this.handleMouseEnter.bind(this)
-        this.handleMouseLeave = this.handleMouseLeave.bind(this) 
-        this.handleBlur = this.handleBlur.bind(this)
-        this.handleFocus = this.handleFocus.bind(this)
-    }
+export const TextField = React.createClass({
+    propTypes: {
+        label: React.PropTypes.string,
+        error: React.PropTypes.string,
+        required: React.PropTypes.bool
+    },
     render() {
         let label = null
         let error = null
@@ -28,36 +24,41 @@ export class TextField extends React.Component {
         }
 
         return (
-            <div ref={ref => this._container = ref} onClick={this.handleClick } onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} className={classNames('input-wrap', { required: this.props.required, error: Boolean(this.props.error) }) }>
+            <div ref={ref => this._container = ref}
+                className={classNames('input-wrap', { required: this.props.required, error: Boolean(this.props.error) }) }
+                onClick={this.handleClick}
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}>
                 {label}
-                <input ref={ref => this._input = ref} onBlur={this.handleBlur} onFocus={this.handleFocus}  type="text" name="criteriaName" required={this.props.required} />
+                <input
+                    ref={ref => this._input = ref}
+                    onBlur={this.handleBlur}
+                    onFocus={this.handleFocus}
+                    type="text"
+                    name="criteriaName"
+                    required={this.props.required} />
                 {error}
             </div>
         )
-    }
+    },
 
     handleClick() {
         this._input.focus()
-    }
+    },
 
     handleMouseEnter() {
         this._container.classList.add('input-wrap-hover')
-    }
+    },
 
     handleMouseLeave() {
         this._container.classList.remove('input-wrap-hover')
-    }
+    },
 
     handleBlur() {
         this._container.classList.remove('input-wrap-focus')
-    }
+    },
 
     handleFocus() {
         this._container.classList.add('input-wrap-focus')
     }
-}
-
-TextField.propTypes = {
-    label: React.PropTypes.string,
-    required: React.PropTypes.bool
-};
+})
