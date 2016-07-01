@@ -3,6 +3,9 @@ import * as ReactDOM from 'react-dom'
 import { LeftSideBar } from './LeftSideBar'
 import { RightSideBar } from './RightSideBar'
 import { TextField } from './TextField'
+import { PageTitle } from './PageTitle'
+import { SearchPanel } from './SearchPanel'
+import { SearchByChars } from './SearchByChars'
 
 class App extends React.Component {
   constructor() {
@@ -12,8 +15,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <LeftSideBar />
-        <div><TextField label="Document" required={true} error="invalid" /></div>
+        <PageTitle title="Workflow Designer" />
+        <SearchPanel>
+          <SearchByChars />
+        </SearchPanel>
+        <LeftSideBar />        
         <RightSideBar />
       </div>
     )
